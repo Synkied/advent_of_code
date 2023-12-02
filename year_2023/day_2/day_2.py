@@ -5,23 +5,23 @@ GAME_GROUP_REGEX = r"Game (\d+): "
 MAX_CUBES_NUMBER = {"red": 12, "green": 13, "blue": 14}
 
 
-def get_subsets(line: str):
+def get_cube_subsets(line: str):
     line = re.sub(GAME_GROUP_REGEX, "", line)
-    subsets = line.split("; ")
+    cube_subsets = line.split("; ")
 
-    return subsets
+    return cube_subsets
 
 
 def check_fewest_cubes(line: str):
     max_types = {"red": 0, "green": 0, "blue": 0}
-    subsets = get_subsets(line)
+    cube_subsets = get_cube_subsets(line)
 
-    for subset in subsets:
+    for subset in cube_subsets:
         for possible_group in MAX_CUBES_NUMBER.keys():
-            sub_type = re.search(rf"(\d+) ({possible_group})", subset)
-            if sub_type:
-                value = int(sub_type.group(1))
-                color = sub_type.group(2)
+            cube_color_value = re.search(rf"(\d+) ({possible_group})", subset)
+            if cube_color_value:
+                value = int(cube_color_value.group(1))
+                color = cube_color_value.group(2)
                 if value > max_types[color]:
                     max_types[color] = value
 
@@ -31,14 +31,14 @@ def check_fewest_cubes(line: str):
 def check_possible_game(line: str):
     game_group = re.search(GAME_GROUP_REGEX, line)
     game_idx = int(game_group.group(1))
-    subsets = get_subsets(line)
+    cube_subsets = get_cube_subsets(line)
 
-    for subset in subsets:
+    for subset in cube_subsets:
         for possible_group in MAX_CUBES_NUMBER.keys():
-            sub_type = re.search(rf"(\d+) ({possible_group})", subset)
-            if sub_type:
-                value = int(sub_type.group(1))
-                color = sub_type.group(2)
+            cube_color_value = re.search(rf"(\d+) ({possible_group})", subset)
+            if cube_color_value:
+                value = int(cube_color_value.group(1))
+                color = cube_color_value.group(2)
                 if (
                     int(value) > MAX_CUBES_NUMBER[color]
                 ):
