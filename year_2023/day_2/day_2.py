@@ -14,16 +14,11 @@ def get_cube_subsets(line: str):
 
 def check_fewest_cubes(line: str):
     max_types = {"red": 0, "green": 0, "blue": 0}
-    cube_subsets = get_cube_subsets(line)
 
-    for subset in cube_subsets:
-        for possible_group in MAX_CUBES_NUMBER.keys():
-            cube_color_value = re.search(rf"(\d+) ({possible_group})", subset)
-            if cube_color_value:
-                value = int(cube_color_value.group(1))
-                color = cube_color_value.group(2)
-                if value > max_types[color]:
-                    max_types[color] = value
+    for possible_group in MAX_CUBES_NUMBER.keys():
+        cube_color_value = [int(cube[0]) for cube in re.findall(rf"(\d+) ({possible_group})", line)]
+        if (max(cube_color_value) > max_types[possible_group]):
+            max_types[possible_group] = max(cube_color_value)
 
     return math.prod(max_types.values())
 
@@ -31,18 +26,11 @@ def check_fewest_cubes(line: str):
 def check_possible_game(line: str):
     game_group = re.search(GAME_GROUP_REGEX, line)
     game_idx = int(game_group.group(1))
-    cube_subsets = get_cube_subsets(line)
 
-    for subset in cube_subsets:
-        for possible_group in MAX_CUBES_NUMBER.keys():
-            cube_color_value = re.search(rf"(\d+) ({possible_group})", subset)
-            if cube_color_value:
-                value = int(cube_color_value.group(1))
-                color = cube_color_value.group(2)
-                if (
-                    int(value) > MAX_CUBES_NUMBER[color]
-                ):
-                    return 0
+    for possible_group in MAX_CUBES_NUMBER.keys():
+        cube_color_value = [int(cube[0]) for cube in re.findall(rf"(\d+) ({possible_group})", line)]
+        if (max(cube_color_value) > MAX_CUBES_NUMBER[possible_group]):
+            return 0
 
     return game_idx
 
@@ -56,6 +44,18 @@ def check_possible_games(lines: [str]):
 
     return sum(valid_games_idx)
 
+def check_test(lines: [str]):
+    max_types = {"red": 0, "green": 0, "blue": 0}
+    for line in lines:
+        for possible_group in MAX_CUBES_NUMBER.keys():
+            cube_color_value = re.search(rf"(\d+) ({possible_group})", line)
+            if cube_color_value:
+                value = int(cube_color_value.group(1))
+                color = cube_color_value.group(2)
+                if value > max_types[color]:
+                    max_types[color] = value
+
+    return math.prod(max_types.values())
 
 def check_fewest_cubes_possible(lines: [str]):
     max_types_for_games = []
