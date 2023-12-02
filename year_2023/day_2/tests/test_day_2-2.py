@@ -1,6 +1,6 @@
 import unittest
 
-from day_2 import check_possible_games
+from day_2 import check_fewest_cubes_possible
 
 
 class TestDay2Part1(unittest.TestCase):
@@ -12,9 +12,9 @@ class TestDay2Part1(unittest.TestCase):
             "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red",
             "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green",
         ]
-        result = check_possible_games(lines)
-        print(result)
-        assert result == 8
+        result = check_fewest_cubes_possible(lines)
+
+        assert result == 2286
 
 
 if __name__ == "__main__":
