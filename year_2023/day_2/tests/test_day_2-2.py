@@ -1,6 +1,6 @@
 import unittest
 
-from day_2 import check_fewest_cubes_possible
+from solver import check_fewest_cubes_possible
 
 
 class TestDay2Part1(unittest.TestCase):
@@ -13,7 +13,6 @@ class TestDay2Part1(unittest.TestCase):
             "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green",
         ]
         result = check_fewest_cubes_possible(lines)
-
         assert result == 2286
 
 

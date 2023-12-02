@@ -43,12 +43,19 @@ def part_two(lines: [str]):
     return result
 
 
-if __name__ == "__main__":
-    with open("./input_1.txt") as input_file:
+def main():
+    import os
+    dirpath = os.path.dirname(__file__)
+    with open(f"{dirpath}/input_1.txt") as input_file:
         part_one_result = part_one(input_file.read().splitlines())
 
-    with open("./input_1.txt") as input_file:
+    with open(f"{dirpath}/input_1.txt") as input_file:
         part_two_result = part_two(input_file.read().splitlines())
 
     print("part_one_result", part_one_result)
     print("part_two_result", part_two_result)
+
+    return {"p1": part_one_result, "p2": part_two_result}
+
+if __name__ == "__main__":
+    main()
