@@ -1,15 +1,9 @@
 import re
 import math
 
+
 GAME_GROUP_REGEX = r"Game (\d+): "
 MAX_CUBES_NUMBER = {"red": 12, "green": 13, "blue": 14}
-
-
-def get_cube_subsets(line: str):
-    line = re.sub(GAME_GROUP_REGEX, "", line)
-    cube_subsets = line.split("; ")
-
-    return cube_subsets
 
 
 def check_fewest_cubes(line: str):
@@ -44,18 +38,6 @@ def check_possible_games(lines: [str]):
 
     return sum(valid_games_idx)
 
-def check_test(lines: [str]):
-    max_types = {"red": 0, "green": 0, "blue": 0}
-    for line in lines:
-        for possible_group in MAX_CUBES_NUMBER.keys():
-            cube_color_value = re.search(rf"(\d+) ({possible_group})", line)
-            if cube_color_value:
-                value = int(cube_color_value.group(1))
-                color = cube_color_value.group(2)
-                if value > max_types[color]:
-                    max_types[color] = value
-
-    return math.prod(max_types.values())
 
 def check_fewest_cubes_possible(lines: [str]):
     max_types_for_games = []
