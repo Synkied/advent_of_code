@@ -11,7 +11,7 @@ def read_root():
 
 
 @app.get("/days/{day_id}")
-def read_item(day_id: int):
+async def read_item(day_id: int):
     solver = importlib.import_module(f"day_{day_id}.solver")
     result = solver.main()
     return {"results": result}

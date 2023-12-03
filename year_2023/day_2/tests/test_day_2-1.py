@@ -1,6 +1,6 @@
 import unittest
 
-from solver import check_possible_games
+from day_2.solver import part_one
 
 
 class TestDay2Part1(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestDay2Part1(unittest.TestCase):
             "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red",
             "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green",
         ]
-        result = check_possible_games(lines)
+        result, _ = part_one(lines)
         assert result == 8
 
 

@@ -1,3 +1,6 @@
+from utils import timeit
+
+
 def compute_result(digits: [str]):
     result = 0
     result += int(f"{digits[0]}{digits[-1]}")
@@ -5,6 +8,7 @@ def compute_result(digits: [str]):
     return result
 
 
+@timeit
 def part_one(lines: [str]):
     result = 0
     for line in lines:
@@ -15,6 +19,7 @@ def part_one(lines: [str]):
     return result
 
 
+@timeit
 def part_two(lines: [str]):
     valid_string_numbers = [
         "one",
@@ -45,17 +50,23 @@ def part_two(lines: [str]):
 
 def main():
     import os
+
     dirpath = os.path.dirname(__file__)
-    with open(f"{dirpath}/input_1.txt") as input_file:
-        part_one_result = part_one(input_file.read().splitlines())
 
     with open(f"{dirpath}/input_1.txt") as input_file:
-        part_two_result = part_two(input_file.read().splitlines())
+        part_one_result, part_one_time = part_one(input_file.read().splitlines())
+
+    with open(f"{dirpath}/input_1.txt") as input_file:
+        part_two_result, part_two_time = part_two(input_file.read().splitlines())
 
     print("part_one_result", part_one_result)
     print("part_two_result", part_two_result)
 
-    return {"p1": part_one_result, "p2": part_two_result}
+    return {
+        "p1": {"result": part_one_result, "time": part_one_time},
+        "p2": {"result": part_two_result, "time": part_two_time},
+    }
+
 
 if __name__ == "__main__":
     main()
